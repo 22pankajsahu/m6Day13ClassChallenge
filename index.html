@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch Me</title>
+    <meta name="author" content="PANKAJ SAHU">
+    <meta name="keywords" content="box, key press, auto move, hover move">
+    <meta name="description" content="This is a simple web application it allows users to move the box by pressing key in keyboard or mouse hover.">
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #box {
+            width: 7vw;
+            height: 7vw;
+            background-color: #b916f4;
+            cursor: pointer;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.4vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">Catch Me</div>
+
+    <script>
+        const box = document.getElementById('box');
+        const viewWidth = window.innerWidth;
+        const viewHeight = window.innerHeight;
+
+        box.addEventListener("mouseover", moveBox);
+
+        function moveBox() {
+            const boxAttr = box.getBoundingClientRect();
+            const pos = getNewPosition(boxAttr.width, boxAttr.height);
+
+            box.style.top = `${pos.y}px`;
+            box.style.left = `${pos.x}px`;
+        }
+
+        function getNewPosition(boxWidth, boxHeight) {
+            const newX = Math.floor(Math.random() * (viewWidth - boxWidth));
+            const newY = Math.floor(Math.random() * (viewHeight - boxHeight));
+
+            return { x: newX, y: newY };
+        }
+
+        document.addEventListener("keydown", function (event) {
+            moveBox(); // Move the box on any key press
+        });
+    </script>
+</body>
+
+</html>
